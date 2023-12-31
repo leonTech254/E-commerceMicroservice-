@@ -12,7 +12,7 @@ namespace Icart_Namespace
 		CartModel getById(int id);
 		CartModel getCartByUserId(String userId,int id);
 		List<CartModel> getAllCartByUserId(String userId);
-		String AddToCart(CartModel model);
+		Task<String> AddToCart(int id,String token,int quantity);
 
 
 	}

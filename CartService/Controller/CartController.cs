@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CartModel_namespace;
 using Cartservice_namespace;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CartController_namespace
 {
@@ -14,15 +15,18 @@ namespace CartController_namespace
 		{
 			_cartService = cartService;
 		}
-
-		[HttpPost("AddToCart")]
-		public IActionResult AddToCart([FromBody] CartModel model)
+		[Authorize]
+		[HttpPost("AddToCart/{productId}/{quantity}/")]
+		public async Task<IActionResult> AddToCartAsync(int productId,int quantity)
 		{
-			var result = _cartService.AddToCart(model);
+			string jwtToken = HttpContext.Request.Headers["Authorization"];
+			
+
+			var result = await _cartService.AddToCart(productId, jwtToken, quantity);
 			return Ok(result);
 		}
 
-		[HttpGet("GetAll")]
+	[HttpGet("GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _cartService.getAll();

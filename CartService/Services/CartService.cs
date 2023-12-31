@@ -1,21 +1,50 @@
 using CartModel_namespace;
 using DBconnection_namespace;
+using ExternalApiData_namespace;
 using Icart_Namespace;
+using JwTNameService;
+using ProductModel_namespace;
 
 namespace Cartservice_namespace
 {
 	public class MycartService : Icart
 	{
 		private readonly DBconn _dbconn;
-		public MycartService(DBconn dbconn)
+		private ExternalAPI _externalApi;
+		private readonly Jwt _jwt;
+		public MycartService(DBconn dbconn,ExternalAPI externalAPI,Jwt jwt)
 		{
 			_dbconn = dbconn;
+			_externalApi = externalAPI;
+			_jwt=jwt;
 		}
-		public string AddToCart(CartModel model)
+		public async Task<String> AddToCart(int productId,String token,int quantity)
 		{
-			_dbconn.cart.Add(model);
-			_dbconn.SaveChanges();
-			return "added to cart successfully";
+			String userId=_jwt.GetUserIdFromToken(token);
+			ProductModel productModel= await _externalApi.GetProductFromProductService(productId);
+			if(productModel!=null)
+			{
+				CartModel cartModel = new CartModel()
+				{
+					price = productModel.price,
+					productId = $"{productId}", 
+					productCart = productModel,
+					dateAdded = DateTime.Now,
+					userId = userId,
+					quantity = quantity
+
+				};
+
+				_dbconn.cart.Add(cartModel);
+				_dbconn.SaveChanges();
+				return "added to cart successfully";
+
+			}else
+			{
+				return "No product found";
+			}
+			
+			
 
 		}
 

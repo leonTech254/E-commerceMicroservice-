@@ -59,12 +59,24 @@ namespace JwTNameService
 
 		internal string? GetUserIdFromToken(string jwtToken)
 		{
+			
+
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var token = tokenHandler.ReadToken(jwtToken) as JwtSecurityToken;
+			var token = tokenHandler.ReadToken(processToken(jwtToken)) as JwtSecurityToken;
 
 			var userId = token?.Claims.FirstOrDefault(claim => claim.Type == "user_id");
 
 			return userId?.Value;
+		}
+
+		internal String processToken(String rawToken)
+		{
+			
+				String[] tokenArray = rawToken.Split(" ");
+				String token = tokenArray[1];
+				return token;
+			
+
 		}
 
 

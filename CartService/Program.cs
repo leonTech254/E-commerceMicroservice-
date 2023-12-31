@@ -15,6 +15,7 @@ using DBconnection_namespace;
 using JwTNameService;
 using policyConfigurations_pnamespace;
 using Cartservice_namespace;
+using ExternalApiData_namespace;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<DBconn>(options => options.UseSqlServer(builder.Co
 //==============================REGISTERING SERVICES=============================================
 builder.Services.AddScoped<Jwt>();
 builder.Services.AddScoped<MycartService>();
+builder.Services.AddScoped<ExternalAPI>();
 /*builder.Services.AddScoped<ProductService>();*/
 //=========================AUTHORIZATION=========================================================
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -62,7 +64,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Service", Version = "v1" });
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cart Service", Version = "v1" });
 
 	// Add JWT Authentication support in Swagger UI
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
