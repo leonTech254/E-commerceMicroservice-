@@ -24,12 +24,13 @@ namespace EmailService.Services
 			try
 			{
 				var message = new MimeMessage();
-				message.From.Add(new MailboxAddress("SocialApp", "leonteqsec@gmail.com"));
+				message.From.Add(new MailboxAddress("LeonMicroservice", "leonteqsec@gmail.com"));
 				message.To.Add(new MailboxAddress(username, useremail));
-				message.Subject = $"Hello, {username}, you are welcome to our Social App";
+				message.Subject = "WELCOME";
 				message.Body = new TextPart("plain")
 				{
-					Text = "This is the body of the email.",
+					Text = $"Hello, {username},Welcome to Leon microservice.You account was created successfuly" +
+					$"you can now login to our system using the username and password you registered with."
 				};
 
 				var smtpHost = _configuration["SmtpConfig:Host"];
