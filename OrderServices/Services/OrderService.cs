@@ -1,6 +1,10 @@
+using CartModel_namespace;
 using DBconnection_namespace;
+using ExternalApiData_namespace;
 using IorderService_namespace;
+using JwTNameService;
 using OrderModel_namespace;
+using payment_namespace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +14,57 @@ namespace orderService_namespace
 	public class OrderService : Iorder
 	{
 		private readonly DBconn _dBconn;
+		private readonly Jwt _jwt;
+		private readonly ExternalAPI _externalAPI;
 
-		public OrderService(DBconn dBconn)
+
+		public OrderService(DBconn dBconn,Jwt jwt,ExternalAPI externalAPI)
 		{
 			_dBconn = dBconn;
+			_jwt = jwt;
+			_externalAPI = externalAPI;
 		}
 
-		public string CreateOrder(OrderModel model)
+		public async Task<String> CreateOrder(int id,String token,PaymentModel payment)
 		{
-			_dBconn.orders.Add(model);
-			_dBconn.SaveChanges();
-			return "Order placed Successfuly";
+			CartModel cart=await _externalAPI.GetCartFromCartService(id, token);
+			Console.WriteLine("Hello leon");
+
+			String userId = _jwt.GetUserIdFromToken(token);
+			Console.WriteLine("Hello leon2");
+
+
+			if (cart!=null)
+			{
+				//check if the use have paid the full amount
+				if(cart.totalprice>payment.AmountInKsh)
+				{
+					return "Order Failed to place,Money should be paid in Full";
+				}else
+				{
+					OrderModel order = new OrderModel()
+					{
+						userId = userId,
+						payAmount=payment.AmountInKsh,
+						productId=cart.productId,
+						datePlaced=DateTime.Now,
+						quantity=cart.quantity
+					};
+					_dBconn.orders.Add(order);
+					_dBconn.SaveChanges();
+					return "Order placed Successfuly";
+
+				}
+			}
+			else
+			{
+				return "Cart not found";
+
+			}
+
+
+
+
 		}
 
 		public string DeleteOrder(int id)

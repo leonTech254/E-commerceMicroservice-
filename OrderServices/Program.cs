@@ -15,6 +15,7 @@ using DBconnection_namespace;
 using JwTNameService;
 using policyConfigurations_pnamespace;
 using orderService_namespace;
+using ExternalApiData_namespace;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<DBconn>(options => options.UseSqlServer(builder.Co
 //==============================REGISTERING SERVICES=============================================
 builder.Services.AddScoped<Jwt>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<ExternalAPI>();
 /*builder.Services.AddScoped<ProductService>();*/
 //=========================AUTHORIZATION=========================================================
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

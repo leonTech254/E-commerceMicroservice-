@@ -3,6 +3,8 @@ using orderService_namespace;
 using OrderModel_namespace;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using payment_namespace;
 
 namespace orderController_namespace
 {
@@ -46,13 +48,15 @@ namespace orderController_namespace
 			return Ok(result);
 		}
 
-		[HttpPost("CreateOrder")]
-		public IActionResult CreateOrder([FromBody] OrderModel orderModel)
+		[HttpPost("CreateOrder/cart/{id}")]
+		[Authorize]
+		public async Task<IActionResult> CreateOrderAsync(int id,PaymentModel payment)
 		{
+			string jwtToken = HttpContext.Request.Headers["Authorization"];
 			try
 			{
 				// You might want to add additional validation logic here before creating the order
-				var result = _orderService.CreateOrder(orderModel);
+				var result = await _orderService.CreateOrder(id, jwtToken, payment);
 				return Ok(result);
 			}
 			catch (Exception ex)

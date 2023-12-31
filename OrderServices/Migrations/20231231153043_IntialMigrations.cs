@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderServices.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class IntialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,9 @@ namespace OrderServices.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     productId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     datePlaced = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    userId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    payAmount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

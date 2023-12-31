@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace OrderServices.Migrations
 {
     [DbContext(typeof(DBconn))]
-    [Migration("20231231091554_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20231231153043_IntialMigrations")]
+    partial class IntialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,9 +36,15 @@ namespace OrderServices.Migrations
                     b.Property<DateTime>("datePlaced")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("payAmount")
+                        .HasColumnType("int");
+
                     b.Property<string>("productId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("userId")
                         .IsRequired()
