@@ -1,5 +1,5 @@
+using CartModel_namespace;
 using Microsoft.EntityFrameworkCore;
-using ProductModel_namespace;
 
 namespace DBconnection_namespace
 {
@@ -10,6 +10,7 @@ namespace DBconnection_namespace
 
 		}
 
-		public DbSet<ProductModel> products { get; set; }
+		public DbSet<CartModel> cart { get; set; }
+
 	}
 }
