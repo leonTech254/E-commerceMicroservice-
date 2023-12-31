@@ -4,6 +4,8 @@ using System.Text.Json;
 using OrderModel_namespace;
 using static Microsoft.Azure.Amqp.CbsConstants;
 using CartModel_namespace;
+using System.Text;
+using RewardModel_namespace;
 
 namespace ExternalApiData_namespace
 {
@@ -37,5 +39,38 @@ namespace ExternalApiData_namespace
 				return null;
 			}
 		}
+
+		public async Task RewardPoints(RewardModel rewardModel, string authToken)
+		{
+			string url = "https://localhost:7130/api/rewards/user";
+
+			// Serialize the RewardModel to JSON
+			string jsonContent = JsonSerializer.Serialize(rewardModel);
+
+			// Create the HTTP request content with JSON data
+			HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+			// Set the authorization header
+			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authToken);
+
+			// Send the POST request
+			HttpResponseMessage response = await client.PostAsync(url, content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				// Handle success (if needed)
+				Console.WriteLine("Successfully sent the POST request");
+			}
+			else
+			{
+				// Handle error (if needed)
+				Console.WriteLine($"Error sending POST request. Status Code: {response.StatusCode}");
+			}
+		}
+
+
+
+
+
 	}
 }

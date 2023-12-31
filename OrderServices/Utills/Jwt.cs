@@ -50,7 +50,7 @@ namespace JwTNameService
 		internal string? GetUsernameFromToken(string jwtToken)
 		{
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var token = tokenHandler.ReadToken(jwtToken) as JwtSecurityToken;
+			var token = tokenHandler.ReadToken(processToken(jwtToken)) as JwtSecurityToken;
 
 			var usernameClaim = token?.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name);
 
@@ -65,6 +65,16 @@ namespace JwTNameService
 			var token = tokenHandler.ReadToken(processToken(jwtToken)) as JwtSecurityToken;
 
 			var userId = token?.Claims.FirstOrDefault(claim => claim.Type == "user_id");
+
+			return userId?.Value;
+		}
+		internal string? GetEmailFromToken(string jwtToken)
+		{
+
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var token = tokenHandler.ReadToken(processToken(jwtToken)) as JwtSecurityToken;
+
+			var userId = token?.Claims.FirstOrDefault(claim => claim.Type == "email");
 
 			return userId?.Value;
 		}
