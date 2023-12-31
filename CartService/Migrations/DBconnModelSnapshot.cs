@@ -33,7 +33,7 @@ namespace CartService.Migrations
                     b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("price")
+                    b.Property<int>("pricePerItem")
                         .HasColumnType("int");
 
                     b.Property<string>("productId")
@@ -41,6 +41,9 @@ namespace CartService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalprice")
                         .HasColumnType("int");
 
                     b.Property<string>("userId")

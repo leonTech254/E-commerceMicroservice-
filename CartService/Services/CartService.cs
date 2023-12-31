@@ -24,9 +24,12 @@ namespace Cartservice_namespace
 			ProductModel productModel= await _externalApi.GetProductFromProductService(productId);
 			if(productModel!=null)
 			{
+				//calculate the total prices 
+				int totalPrice = quantity * productModel.price;
 				CartModel cartModel = new CartModel()
 				{
-					price = productModel.price,
+					pricePerItem = productModel.price,
+					totalprice=totalPrice,
 					productId = $"{productId}", 
 					productCart = productModel,
 					dateAdded = DateTime.Now,
@@ -68,12 +71,52 @@ namespace Cartservice_namespace
 			return cart;
 		}
 
-		public CartModel getCartByUserId(string userId, int id)
+		public CartModel getCartByUserIdAndCartId(string token, int id)
 		{
+			String userId=_jwt.GetUserIdFromToken(token);
 			CartModel cart = _dbconn.cart.FirstOrDefault(e => e.Id == id && e.userId == userId);
 			return cart;
 
 
 		}
+
+		public string IncreaseQuantity(int id, string token, int quantity)
+		{
+			CartModel existingItem = getCartByUserIdAndCartId(token, id);
+
+			if (existingItem != null)
+			{
+				existingItem.quantity += quantity;
+				_dbconn.SaveChanges();
+				return "Quantity increased successfully.";
+			}
+			else
+			{
+				return "Cart item not found.";
+			}
+		}
+		public string DecreaseQuantity(int id, string token, int quantity)
+		{
+			CartModel existingItem = getCartByUserIdAndCartId(token, id);
+
+			if (existingItem != null)
+			{
+				if (existingItem.quantity >= quantity)
+				{
+					existingItem.quantity -= quantity;
+					_dbconn.SaveChanges();
+					return "Quantity decreased successfully.";
+				}
+				else
+				{
+					return "Insufficient quantity to decrease.";
+				}
+			}
+			else
+			{
+				return "Cart item not found.";
+			}
+		}
+
 	}
 }

@@ -21,7 +21,8 @@ namespace CartService.Migrations
                     dateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
                     userId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
-                    price = table.Column<int>(type: "int", nullable: false)
+                    pricePerItem = table.Column<int>(type: "int", nullable: false),
+                    totalprice = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

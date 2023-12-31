@@ -17,16 +17,16 @@ namespace CartController_namespace
 		}
 		[Authorize]
 		[HttpPost("AddToCart/{productId}/{quantity}/")]
-		public async Task<IActionResult> AddToCartAsync(int productId,int quantity)
+		public async Task<IActionResult> AddToCartAsync(int productId, int quantity)
 		{
 			string jwtToken = HttpContext.Request.Headers["Authorization"];
-			
+
 
 			var result = await _cartService.AddToCart(productId, jwtToken, quantity);
 			return Ok(result);
 		}
 
-	[HttpGet("GetAll")]
+		[HttpGet("GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _cartService.getAll();
@@ -50,8 +50,42 @@ namespace CartController_namespace
 		[HttpGet("GetCartByUserId/{userId}/{id}")]
 		public IActionResult GetCartByUserId(string userId, int id)
 		{
-			var result = _cartService.getCartByUserId(userId, id);
+			var result = _cartService.getCartByUserIdAndCartId(userId, id);
 			return Ok(result);
+		}
+
+		[HttpPost("increase-quantity")]
+		[Authorize]
+		public IActionResult IncreaseQuantity([FromForm] int id, [FromForm] int quantity)
+		{
+			string token = HttpContext.Request.Headers["Authorization"]; // Assuming token is passed in the header
+			string result = _cartService.IncreaseQuantity(id, token, quantity);
+
+			if (result.Contains("successfully"))
+			{
+				return Ok(result);
+			}
+			else
+			{
+				return BadRequest(result);
+			}
+		}
+
+		[HttpPost("decrease-quantity")]
+		[Authorize] // Add authorization as needed
+		public IActionResult DecreaseQuantity([FromForm] int id, [FromForm] int quantity)
+		{
+			string token = HttpContext.Request.Headers["Authorization"]; // Assuming token is passed in the header
+			string result = _cartService.DecreaseQuantity(id, token, quantity);
+
+			if (result.Contains("successfully"))
+			{
+				return Ok(result);
+			}
+			else
+			{
+				return BadRequest(result);
+			}
 		}
 	}
 }

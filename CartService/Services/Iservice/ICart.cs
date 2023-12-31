@@ -10,9 +10,12 @@ namespace Icart_Namespace
 		}
 		List<CartModel> getAll();
 		CartModel getById(int id);
-		CartModel getCartByUserId(String userId,int id);
+		CartModel getCartByUserIdAndCartId(String userId,int id);
 		List<CartModel> getAllCartByUserId(String userId);
 		Task<String> AddToCart(int id,String token,int quantity);
+		String IncreaseQuantity(int id,String token,int quantity);
+		String DecreaseQuantity(int id, String token, int quantity);
+
 
 
 	}

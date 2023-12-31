@@ -14,7 +14,8 @@ namespace CartModel_namespace
 		public DateTime dateAdded { get; set; }
 		public String userId {  get; set; }
 		public int quantity { get; set; }
-		public int price { get; set; }
+		public int pricePerItem { get; set; }
+		public int totalprice { get; set; }
 		public  ProductModel productCart;
 	}
 }
