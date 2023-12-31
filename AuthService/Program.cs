@@ -57,7 +57,7 @@ builder.Services.AddIdentity<UserModel, IdentityRole>()
 
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management API", Version = "v1" });
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User Authentication", Version = "v1" });
 
 	// Add JWT Authentication support in Swagger UI
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
