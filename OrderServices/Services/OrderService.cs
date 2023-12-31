@@ -80,6 +80,7 @@ namespace orderService_namespace
 						};
 
 						await _externalAPI.RewardPoints(reward, token);
+						await _messageServce.AddRewardToQueue(orderDTO);
 
 					}
 
