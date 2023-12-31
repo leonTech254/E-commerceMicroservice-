@@ -11,5 +11,6 @@ namespace ProductModel_namespace
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string dateAdded { get; set; }
+		public int price { get; set; }
 	}
 }

@@ -4,7 +4,7 @@ using Cartservice_namespace;
 
 namespace CartController_namespace
 {
-	[Route("api/[controller]")]
+	[Route("api/cart/")]
 	[ApiController]
 	public class CartController : ControllerBase
 	{
