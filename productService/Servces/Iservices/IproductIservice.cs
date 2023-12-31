@@ -6,8 +6,9 @@ namespace ProductServiceInterface_namespace
 	{
 		List<ProductModel> getAllProducts();
 		String AddProduct(ProductModel product);
-		String UpdateProduct(ProductModel product);
+		String UpdateProduct(int productid,ProductModel product);
 		String DeleteProduct(ProductModel product);
+		ProductModel getProductById(int productid);
 
 	}
 }

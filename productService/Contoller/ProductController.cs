@@ -29,6 +29,12 @@ namespace YourNamespace.Controllers
 			var result = _productService.DeleteProduct(product);
 			return Ok(result);
 		}
+		[HttpGet("getProductById/{id}")]
+		public IActionResult getItemById(int id)
+		{
+			var result = _productService.getProductById(id);
+			return Ok(result);
+		}
 
 		[HttpGet("GetAllProducts")]
 		public IActionResult GetAllProducts()
@@ -37,10 +43,10 @@ namespace YourNamespace.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut("UpdateProduct")]
-		public IActionResult UpdateProduct([FromBody] ProductModel product)
+		[HttpPut("UpdateProduct/{id}")]
+		public IActionResult UpdateProduct(int id, [FromBody] ProductModel product)
 		{
-			var result = _productService.UpdateProduct(product);
+			var result = _productService.UpdateProduct(id, product);
 			return Ok(result);
 		}
 	}

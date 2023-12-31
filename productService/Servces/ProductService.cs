@@ -13,8 +13,10 @@ namespace ProductService_namespace
 
 		public string AddProduct(ProductModel product)
 		{
-		_dBconn.products.AddAsync(product);
-		_dBconn.SaveChanges();
+			DateTime dateTime = DateTime.Now;
+			product.dateAdded = dateTime.ToString();
+			_dBconn.products.AddAsync(product);
+			_dBconn.SaveChanges();
 			return "Product Added successfully " +product.ToString();
 		}
 
@@ -31,13 +33,35 @@ namespace ProductService_namespace
 			return allproducts;
 		}
 
-		public string UpdateProduct(ProductModel product)
+		public ProductModel getProductById(int productid)
 		{
-			// Assuming you have some logic to update the product
-			_dBconn.products.Update(product);
-			_dBconn.SaveChanges();
-			return "Updated successfully";
+			List<ProductModel> productModelsList = _dBconn.products.ToList();
+			ProductModel dbproduct =productModelsList.FirstOrDefault(e=>e.Id==productid) ;
+			return dbproduct;
 		}
+
+		public string UpdateProduct(int productid, ProductModel updatedProduct)
+		{
+			ProductModel existingProduct = getProductById(productid);
+
+			if (existingProduct != null)
+			{
+				existingProduct.price = updatedProduct.price;
+				existingProduct.Description = updatedProduct.Description;
+				existingProduct.Name = updatedProduct.Name;
+				
+
+				// Save changes to the context
+				_dBconn.SaveChanges();
+
+				return "Updated successfully";
+			}
+			else
+			{
+				return "Item not Found";
+			}
+		}
+
 	}
 
 
