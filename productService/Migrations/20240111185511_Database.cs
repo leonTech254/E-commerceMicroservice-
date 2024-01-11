@@ -5,7 +5,7 @@
 namespace productService.Migrations
 {
     /// <inheritdoc />
-    public partial class secondMigrations : Migration
+    public partial class Database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

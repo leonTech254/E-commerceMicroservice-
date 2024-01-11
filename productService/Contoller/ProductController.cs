@@ -19,14 +19,15 @@ namespace YourNamespace.Controllers
 		[HttpPost("AddProduct")]
 		public IActionResult AddProduct([FromBody] ProductModel product)
 		{
+			Console.WriteLine(product.Name);
 			var result = _productService.AddProduct(product);
 			return Ok(result);
 		}
 
-		[HttpDelete("DeleteProduct")]
-		public IActionResult DeleteProduct([FromBody] ProductModel product)
+		[HttpDelete("DeleteProduct/{id}")]
+		public IActionResult DeleteProduct(int id)
 		{
-			var result = _productService.DeleteProduct(product);
+			var result = _productService.DeleteProduct(id);
 			return Ok(result);
 		}
 		[HttpGet("getProductById/{id}")]

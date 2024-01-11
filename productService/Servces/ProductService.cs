@@ -1,4 +1,5 @@
 using DBconnection_namespace;
+using Microsoft.AspNetCore.Mvc;
 using ProductModel_namespace;
 using ProductServiceInterface_namespace;
 
@@ -20,11 +21,21 @@ namespace ProductService_namespace
 			return "Product Added successfully " +product.ToString();
 		}
 
-		public string DeleteProduct(ProductModel product)
+		public string DeleteProduct(int id)
 		{
-			_dBconn.products.Remove(product);
+			List<ProductModel> productModels =getAllProducts();
+			ProductModel productModel= productModels.FirstOrDefault(e=>e.Id==id);
+			if(productModel!=null)
+			{
+			_dBconn.products.Remove(productModel);
 			_dBconn.SaveChanges();
 			return "deleted successfully";
+			}else
+			{
+				return "null";
+			}
+
+		
 		}
 
 		public List<ProductModel> getAllProducts()
