@@ -44,7 +44,7 @@ namespace USerServices_namespace
 			var token = _jwt.GenerateToken(user);
 
 			Console.WriteLine("Login Successfully");
-			return new OkObjectResult(new { msg = "Login successfully", usertoker = token });
+			return new OkObjectResult(new { msg = "Login successfully", usertoker = token,username=logins.username });
 		}
 		public async Task<bool> RegisterUser(RegisterDTO registerDTO)
 		{

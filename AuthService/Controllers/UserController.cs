@@ -1,4 +1,5 @@
 ﻿using LogInDTONameSpace;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Registration_Namespace;
@@ -37,6 +38,13 @@ namespace USerController_Namespace
 			}
 
 			return new BadRequestObjectResult(new { Message = "Registration failed" });
+		}
+
+		[HttpGet("test/auth")]
+		[Authorize]
+		public async Task<ActionResult> checkedAuth()
+		{
+			return new OkObjectResult(true);
 		}
 
 	}
