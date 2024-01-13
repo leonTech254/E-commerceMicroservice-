@@ -15,7 +15,7 @@ namespace CartController_namespace
 		{
 			_cartService = cartService;
 		}
-		[Authorize]
+		// [Authorize]
 		[HttpPost("AddToCart/{productId}/{quantity}/")]
 		public async Task<IActionResult> AddToCartAsync(int productId, int quantity)
 		{

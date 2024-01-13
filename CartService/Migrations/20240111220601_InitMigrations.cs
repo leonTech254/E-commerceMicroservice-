@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CartService.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialMigrations : Migration
+    public partial class InitMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

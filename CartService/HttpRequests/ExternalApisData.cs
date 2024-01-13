@@ -16,7 +16,8 @@ namespace ExternalApiData_namespace
 
 		public async Task<ProductModel> GetProductFromProductService(int id)
 		{
-			string url= "https://localhost:7257/api/v1/products/getProductById/"+id;
+			Console.WriteLine("reached hear");
+			string url= "https://localhost:5087/api/v1/products/getProductById/"+id;
 			HttpResponseMessage response = await client.GetAsync(url);
 
 			if (response.IsSuccessStatusCode)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CartService.Migrations
 {
     [DbContext(typeof(DBconn))]
-    [Migration("20231231135741_IntialMigrations")]
-    partial class IntialMigrations
+    [Migration("20240111220601_InitMigrations")]
+    partial class InitMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
