@@ -4,16 +4,19 @@ using DBconnection_namespace;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace OrderServices.Migrations
+namespace CartService.Migrations
 {
     [DbContext(typeof(DBconn))]
-    partial class DBconnModelSnapshot : ModelSnapshot
+    [Migration("20240114103836_initCartFixed")]
+    partial class initCartFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace OrderServices.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("OrderModel_namespace.OrderModel", b =>
+            modelBuilder.Entity("CartModel_namespace.CartModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +33,10 @@ namespace OrderServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("datePlaced")
+                    b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("payAmount")
+                    b.Property<int>("pricePerItem")
                         .HasColumnType("int");
 
                     b.Property<string>("productId")
@@ -43,13 +46,16 @@ namespace OrderServices.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("totalprice")
+                        .HasColumnType("int");
+
                     b.Property<string>("userId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("orders");
+                    b.ToTable("cart");
                 });
 #pragma warning restore 612, 618
         }

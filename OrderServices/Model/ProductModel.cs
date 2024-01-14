@@ -6,6 +6,8 @@ namespace ProductModel_namespace
 {
 	public class ProductModel
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		public string productId { get; set; }
 		public string dateAdded { get; set; }

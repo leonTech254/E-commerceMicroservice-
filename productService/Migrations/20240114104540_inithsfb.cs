@@ -5,7 +5,7 @@
 namespace productService.Migrations
 {
     /// <inheritdoc />
-    public partial class Databinit : Migration
+    public partial class inithsfb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

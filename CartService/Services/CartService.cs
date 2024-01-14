@@ -35,9 +35,9 @@ namespace Cartservice_namespace
 					productCart = productModel,
 					dateAdded = DateTime.Now,
 					userId = userId,
-					quantity = quantity
-
+					quantity = quantity,
 				};
+				
 
 				_dbconn.cart.Add(cartModel);
 				_dbconn.SaveChanges();

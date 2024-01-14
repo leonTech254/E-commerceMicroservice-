@@ -8,13 +8,16 @@ namespace CartModel_namespace
 	{
 		public CartModel() { }
 		
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
+		 [ForeignKey("ProductModel")]
 		public string productId { get; set; }
 		public DateTime dateAdded { get; set; }
 		public String userId {  get; set; }
 		public int quantity { get; set; }
 		public int pricePerItem { get; set; }
 		public int totalprice { get; set; }
-		public  ProductModel productCart;
+		public  virtual ProductModel productCart {get;set;}
 	}
 }

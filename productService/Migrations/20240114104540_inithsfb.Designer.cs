@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace productService.Migrations
 {
     [DbContext(typeof(DBconn))]
-    [Migration("20240113154305_Databinit")]
-    partial class Databinit
+    [Migration("20240114104540_inithsfb")]
+    partial class inithsfb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
