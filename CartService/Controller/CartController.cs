@@ -20,10 +20,8 @@ namespace CartController_namespace
 		public async Task<IActionResult> AddToCartAsync(int productId, int quantity)
 		{
 			string jwtToken = HttpContext.Request.Headers["Authorization"];
-
-
 			var result = await _cartService.AddToCart(productId, jwtToken, quantity);
-			return Ok(result);
+			return Ok("result");
 		}
 
 		[HttpGet("GetAll")]

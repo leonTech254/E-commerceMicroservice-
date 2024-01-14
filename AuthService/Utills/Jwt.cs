@@ -41,7 +41,7 @@ namespace JwTNameService
 				audience,         // Audience
 				claims,           // Claims
 				DateTime.Now,
-				DateTime.Now.AddMinutes(30),  // Expiry
+				DateTime.Now.AddMinutes(12230),  // Expiry
 				credentials        // Signing credentials
 			);
 

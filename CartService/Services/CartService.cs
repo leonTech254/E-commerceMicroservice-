@@ -22,6 +22,7 @@ namespace Cartservice_namespace
 		{
 			String userId=_jwt.GetUserIdFromToken(token);
 			ProductModel productModel= await _externalApi.GetProductFromProductService(productId);
+
 			if(productModel!=null)
 			{
 				//calculate the total prices 

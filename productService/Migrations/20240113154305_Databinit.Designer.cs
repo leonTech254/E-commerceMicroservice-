@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace productService.Migrations
 {
     [DbContext(typeof(DBconn))]
-    [Migration("20240111185511_Database")]
-    partial class Database
+    [Migration("20240113154305_Databinit")]
+    partial class Databinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,10 @@ namespace productService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("dateAdded")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("imageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
