@@ -88,6 +88,7 @@ namespace Cartservice_namespace
 			if (existingItem != null)
 			{
 				existingItem.quantity += quantity;
+				existingItem.totalprice=existingItem.pricePerItem*existingItem.quantity;
 				_dbconn.SaveChanges();
 				return "Quantity increased successfully.";
 			}
@@ -105,6 +106,7 @@ namespace Cartservice_namespace
 				if (existingItem.quantity >= quantity)
 				{
 					existingItem.quantity -= quantity;
+					existingItem.totalprice=existingItem.pricePerItem*existingItem.quantity;
 					_dbconn.SaveChanges();
 					return "Quantity decreased successfully.";
 				}

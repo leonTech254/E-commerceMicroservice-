@@ -16,6 +16,7 @@ namespace CartModel_namespace
 		public int quantity { get; set; }
 		public int pricePerItem { get; set; }
 		public int totalprice { get; set; }
+		
 		public  ProductModel productCart;
 	}
 }

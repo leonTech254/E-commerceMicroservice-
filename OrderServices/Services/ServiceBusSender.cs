@@ -40,6 +40,27 @@ namespace MessageServiceNamespace
 			}
 		}
 
-		
-	}
+        internal async Task<ActionResult> AddRewardToQueue(OrderDTO orderDTO)
+        {
+           string connectionString = _configuration.GetSection("AzureServices:connectionString").Value;
+			string queueName = _configuration.GetSection("AzureServices:qrewards").Value;
+			string userBody = JsonConvert.SerializeObject(orderDTO);
+
+			await using (ServiceBusClient client = new ServiceBusClient(connectionString))
+			{
+				// Create a sender for the queue
+				ServiceBusSender sender = client.CreateSender(queueName);
+
+				// Create a message
+				ServiceBusMessage message = new ServiceBusMessage(Encoding.UTF8.GetBytes(userBody));
+
+				// Send the message
+				await sender.SendMessageAsync(message);
+
+				Console.WriteLine($"User Added to Queue Successfully: {userBody}");
+
+				return new OkObjectResult($"USer {userBody} added successfully");
+			}
+        }
+    }
 }
